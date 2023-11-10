@@ -109,7 +109,7 @@ jobs:
       - name: Set Up SSH Keys
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          echo "$SSH_PRIVATE_KEY" | tr -d '\n' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ec2-13-233-255-106.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
 
