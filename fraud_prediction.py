@@ -40,7 +40,7 @@ class MyFlaskApp:
         def get_prediction(id):
             try:
                 # Retrieve the prediction result for a specific transaction
-                prediction = self.prediction_results.get('id', -1)  # -1 Indicates No prediction Available
+                prediction = self.prediction_results.get('id', -1)  # -1 Indicates No Prediction Available
 
                 return jsonify({"prediction": prediction})
 
