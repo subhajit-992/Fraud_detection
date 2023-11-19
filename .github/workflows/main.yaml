@@ -111,13 +111,13 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PUBLIC_KEY: ${{secrets.SSH_PUBLIC_KEY}}
         run: |
-          echo "$AWS_PRIVATE_KEY" > key.pem
+          echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 400 key.pem
 
  
       - name: Deploy Flask App to EC2
         run: |
-          ssh -v -i key.pem ubuntu@ec2-15-206-69-172.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+          ssh -v -i key.pem ubuntu@ec2-3-108-41-103.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             cd fraud_prediction.py
             git pull origin main
             source venv/bin/activate
