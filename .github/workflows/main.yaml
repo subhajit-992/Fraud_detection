@@ -118,7 +118,7 @@ jobs:
           echo "$SSH_PUBLIC_KEY" > ~/.ssh/id_ed25519.pub
           chmod 600 ~/.ssh/id_ed25519.pub
           
-          ssh -i ~/.ssh/id_ed25519 user@ec2-13-235-48-53.ap-south-1.compute.amazonaws.com "\
+          ssh -i ~/.ssh/id_ed25519 user@ec2-13-127-13-211.ap-south-1.compute.amazonaws.com "\
             touch ~/.ssh/authorized_keys && \
             chmod 600 ~/.ssh/authorized_keys && \
             cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys"
@@ -126,7 +126,7 @@ jobs:
  
       - name: Deploy Flask App to EC2
         run: |
-          ssh -v -i ~/.ssh/id_ed25519 ec2-user@ec2-13-235-48-53.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+          ssh -v -i ~/.ssh/id_ed25519 ec2-user@ec2-13-127-13-211.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             cd fraud_prediction.py
             git pull origin main
             source venv/bin/activate
