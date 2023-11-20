@@ -120,7 +120,7 @@ jobs:
           ssh -v -i key.pem ubuntu@ec2-13-233-106-67.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             echo "Current directory: $(pwd)"
             ls -l
-            if [ ! -d "venv"]; then
+            if [ ! -d "venv" ]; then
              python3 -m venv venv
             fi
             source venv/bin/activate
