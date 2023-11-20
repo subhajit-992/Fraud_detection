@@ -117,7 +117,7 @@ jobs:
  
       - name: Deploy Flask App to EC2
         run: |
-          ssh -v -i key.pem ubuntu@ec2-13-127-63-124.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+          ssh -v -i key.pem ubuntu@ec2-13-235-70-208.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             python3 -m venv venv
             source venv/bin/activate
             pip install -r requirements.txt
