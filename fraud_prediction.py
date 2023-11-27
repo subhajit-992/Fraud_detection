@@ -14,7 +14,7 @@ class MyFlaskApp:
         @self.app.route('/predict', methods=['POST'])
         def predict():
             try:
-                # Receive transaction data as JSON 
+                # Receive transaction Data as JSON 
                 transaction_data = request.get_json()
                 #data = json.loads(transaction_data)
                 df = pd.DataFrame(transaction_data, index=[0])
