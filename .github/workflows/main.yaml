@@ -117,9 +117,10 @@ jobs:
   
       - name: Deploy Flask App to EC2
         run: |
-          ssh -v -i key.pem ubuntu@ec2-15-206-164-40.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+          ssh -v -i key.pem ubuntu@ec2-15-206-186-99.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             echo "Current directory: $(pwd)"
             ls -l
+            ls /home/ubuntu/_work/Fraud_detection/Fraud_detection  # Check if requirements.txt exists
             if [ ! -d "venv" ]; then
              python3 -m venv venv
             fi
