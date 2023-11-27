@@ -117,7 +117,7 @@ jobs:
   
       - name: Deploy Flask App to EC2
         run: |
-          ssh -v -i key.pem ubuntu@ec2-15-206-186-99.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+          ssh -v -i key.pem ubuntu@ec2-3-110-136-74.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             echo "Current directory: $(pwd)"
             ls -l
             ls /home/ubuntu/_work/Fraud_detection/Fraud_detection  # Check if requirements.txt exists
@@ -125,6 +125,7 @@ jobs:
              python3 -m venv venv
             fi
             source venv/bin/activate
+            chmod +r requirements.txt  # Set read permissions for requirements.txt
             pip install -r requirements.txt
             gunicorn fraud_prediction:self.app --bind 0.0.0.0:8000
           EOF
