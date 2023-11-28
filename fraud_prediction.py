@@ -10,7 +10,8 @@ class MyFlaskApp:
     def __init__(self):
         self.app = Flask(__name__)
         self.prediction_results = {}
-
+        
+    def define_routes(self):
         @self.app.route('/predict', methods=['POST'])
         def predict():
             try:
