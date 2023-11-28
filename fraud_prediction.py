@@ -10,8 +10,7 @@ class MyFlaskApp:
     def __init__(self):
         self.app = Flask(__name__)
         self.prediction_results = {}
-        
-    def define_routes(self):
+
         @self.app.route('/predict', methods=['POST'])
         def predict():
             try:
@@ -49,6 +48,9 @@ class MyFlaskApp:
                 return jsonify({"error": str(e)}), 500
     def run(self):
         self.app.run(debug=True)
+
+def create_app():
+    return MyFlaskApp().app
 
 
 #if __name__ == '__main__':
