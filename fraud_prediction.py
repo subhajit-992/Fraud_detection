@@ -53,6 +53,6 @@ class MyFlaskApp:
 
 app_1 = MyFlaskApp()
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #app_1 = MyFlaskApp()
-    app_1.run()
+    #app_1.run()
