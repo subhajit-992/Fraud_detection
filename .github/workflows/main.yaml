@@ -117,7 +117,7 @@ jobs:
    
       - name: Deploy Flask App to EC2
         run: |
-         ssh -v -i key.pem ubuntu@ec2-52-66-249-128.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+         ssh -v -i key.pem ubuntu@ec2-65-1-94-117.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             cd /home/ubuntu/_work/Fraud_detection/Fraud_detection
             current_dir="\$(pwd)"
             echo "Current directory: \$current_dir"
@@ -128,7 +128,7 @@ jobs:
             fi
             source "\$current_dir/venv/bin/activate"
             pip install -r "\$current_dir/requirements.txt"   
-            gunicorn -w 4 -b 0.0.0.0:8000 fraud_prediction:app_1
+            gunicorn -w 4 -b 0.0.0.0:8000 fraud_prediction:MyFlaskApp
          EOF
       - name: Clean previous images and containers
         run: |

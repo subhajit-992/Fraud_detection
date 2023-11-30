@@ -7,7 +7,7 @@ import pandas as pd
 
 
 class MyFlaskApp:
-    def __init__(self):
+    def __init__(self,app,prediction_results):
         self.app = Flask(__name__)
         self.prediction_results = {}
         self.define_routes()
@@ -51,7 +51,7 @@ class MyFlaskApp:
     def run(self):
         self.app.run(debug=True)
 
-app_1 = MyFlaskApp()
+#app_1 = MyFlaskApp()
 
 #if __name__ == '__main__':
     #app_1 = MyFlaskApp()
