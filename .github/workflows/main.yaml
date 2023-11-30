@@ -128,7 +128,7 @@ jobs:
             fi
             source "\$current_dir/venv/bin/activate"
             pip install -r "\$current_dir/requirements.txt"   
-            gunicorn -w 4 -b 0.0.0.0:8000 fraud_prediction:MyFlaskApp
+            gunicorn -w 4 -b 0.0.0.0:8000 fraud_prediction:app
          EOF
       - name: Clean previous images and containers
         run: |
