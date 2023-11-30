@@ -6,15 +6,19 @@ import json
 import pandas as pd
 
 
-class MyFlaskApp:
-    def __init__(self,app,prediction_results):
-        self.app = Flask(__name__)
-        self.prediction_results = {}
-        self.define_routes()
+#class MyFlaskApp:
+    #def __init__(self,app,prediction_results):
+        #self.app = Flask(__name__)
+        #self.prediction_results = {}
+        #self.define_routes()
         
-    def define_routes(self):
-        @self.app.route('/predict', methods=['POST'])
-        def predict():
+
+app = Flask(__name__)
+prediction_results = {}
+
+#def define_routes(self):
+@app.route('/predict', methods=['POST'])
+def predict():
             try:
                 # Receive transaction Data As JSON 
                 transaction_data = request.get_json()
@@ -29,7 +33,7 @@ class MyFlaskApp:
 
 
                 # Store the prediction result
-                self.prediction_results[transaction_data.get('id')] = prediction
+                prediction_results[transaction_data.get('id')] = prediction
 
                 # Return the prediction result
                 return jsonify({"prediction": prediction})
@@ -37,22 +41,22 @@ class MyFlaskApp:
             except Exception as e:
                 return jsonify({"error":str(e)}), 500
             
-        # Endpoint for retrieving prediction results
-        @self.app.route('/get_prediction/<id>', methods=['GET'])
-        def get_prediction(id):
+# Endpoint for retrieving prediction results
+@app.route('/get_prediction/<id>', methods=['GET'])
+def get_prediction(id):
             try:
                 # Retrieve the prediction result for a specific transaction
-                prediction = self.prediction_results.get(id, -1)  # -1 Indicates No Prediction Available
+                prediction = prediction_results.get(id, -1)  # -1 Indicates No Prediction Available
 
                 return jsonify({"prediction": prediction})
 
             except Exception as e:
                 return jsonify({"error": str(e)}), 500
-    def run(self):
-        self.app.run(debug=True)
+    #def run(self):
+        #self.app.run(debug=True)
 
 #app_1 = MyFlaskApp()
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
     #app_1 = MyFlaskApp()
-    #app_1.run()
+    app.run(debug=True)

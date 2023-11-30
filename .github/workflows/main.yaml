@@ -117,7 +117,7 @@ jobs:
    
       - name: Deploy Flask App to EC2
         run: |
-         ssh -v -i key.pem ubuntu@ec2-3-110-207-151.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
+         ssh -v -i key.pem ubuntu@ec2-65-1-134-250.ap-south-1.compute.amazonaws.com 'bash -s' << EOF
             cd /home/ubuntu/_work/Fraud_detection/Fraud_detection
             current_dir="\$(pwd)"
             echo "Current directory: \$current_dir"
