@@ -2,6 +2,7 @@ from creditcard.logger import logging
 from creditcard.exception import CreditCardsException
 from creditcard.pipeline.batch_prediction import CreditCardBatchPrediction
 from flask import Flask, request, jsonify
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 import json
 import pandas as pd
 
@@ -14,10 +15,39 @@ import pandas as pd
         
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['JWT_SECRET_KEY'] = 'jwt_secret_key'  # Secret key for JWT
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 3600 # Access token expiration time (in seconds)
+
+jwt = JWTManager(app)
+
 prediction_results = {}
+
+users = {
+    'user1': {'password': 'password1', 'role': 'user'},
+    'user2': {'password': 'password2', 'role': 'admin'}
+}
+
+# Endpoint for user authentication and token generation
+@app.route('/login', methods=['POST'])
+def login():
+    auth = request.authorization
+
+    if not auth or not auth.username or not auth.password:
+        return jsonify({'message': 'Authentication required!'}), 401
+
+    username = auth.username
+    password = auth.password
+
+    if username in users and users[username]['password'] == password:
+        access_token = create_access_token(identity=username)
+        return jsonify({'access_token': access_token}), 200
+
+    return jsonify({'message': 'Invalid credentials'}), 401
 
 #def define_routes(self):
 @app.route('/predict', methods=['POST'])
+@jwt_required()
 def predict():
             try:
                 # Receive transaction Data As JSON 
@@ -43,6 +73,7 @@ def predict():
             
 # Endpoint for retrieving prediction results
 @app.route('/get_prediction/<id>', methods=['GET'])
+@jwt_required()
 def get_prediction(id):
             try:
                 # Retrieve the prediction result for a specific transaction
